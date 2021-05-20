@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import "package:flutter/material.dart";
 import 'package:flutter_diplom/models/Product.dart';
 
 class BuyProduct extends Product {
   Product product;
   bool fun = true;
-  int count = 0;
+  int allprice = 0;
   List<Product> products = [];
   BuyProduct({
     this.product,
@@ -21,9 +23,13 @@ class BuyProduct extends Product {
   }
 
   void addAmount(Product product, int sum) {
-      product.amount = sum;    
+    product.amount = sum;
 
     print(product.name);
+  }
+
+  void allPrice(int amount, int count) {
+    allprice += amount * count;
   }
 
   bool prov(Product product) {

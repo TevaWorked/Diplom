@@ -6,8 +6,10 @@ import 'package:flutter_diplom/models/BuyProduct.dart';
 import 'package:flutter_diplom/models/Product.dart';
 
 import '../../../constants.dart';
+
 class Body extends StatefulWidget {
   final BuyProduct product;
+  int allPrice = 0;
   Body({Key key, this.product}) : super(key: key);
 
   @override
@@ -17,10 +19,8 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   final BuyProduct product;
   _BodyState(this.product);
-  
+
   Widget build(BuildContext context) {
-  int allPrice = 0;
-  
     double width = MediaQuery.of(context).size.width;
     print(product.products.length);
     return Column(
@@ -29,38 +29,55 @@ class _BodyState extends State<Body> {
           child: ListView.builder(
               scrollDirection: Axis.vertical,
               itemCount: product.products.length,
-              itemBuilder: (context, index) => _buildItems(
+              itemBuilder: (context, index) {
+                return Dismissible(
+                  key: Key(product.products[index].id.toString()),
+                  child: _buildItems(
                     product.products[index].name,
                     product.products[index].imageBG,
                     product.products[index].price,
                     product.products[index].amount,
                     width,
-                  )),
+                  ),
+                  onDismissed: (direction) {
+                    setState(() {
+                      product.products.removeAt(index);
+                    });
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    child: Icon(Icons.cancel),
+                  ),
+                );
+              }),
         ),
         Padding(
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Row(
             children: [
-              Text("Итог:  $allPrice "),
-               Expanded(
-                  child: FlatButton(
-                    height: 50,
-                   onPressed: (){},
+              Expanded(
+                child: FlatButton(
+                  height: 50,
+                  onPressed: () {},
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
-                      color: Colors.blue,
-                   child: Text("Заказать"),),
-               ),
+                  color: Colors.blue,
+                  child: Text(
+                    "Заказать",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ),
+              ),
             ],
           ),
         )
       ],
-      
     );
   }
 }
 
-Widget _buildItems(String name, String image, int price, int count, double width) {
+Widget _buildItems(
+    String name, String image, int price, int count, double width) {
   return Padding(
     padding: EdgeInsets.all(kDefaultPadding),
     child: InkWell(
@@ -105,7 +122,7 @@ Widget _buildItems(String name, String image, int price, int count, double width
                       ),
                       Container(
                         child: Text(
-                          "Итог: " +  (count * price).toString(),
+                          "Итог: " + (count * price).toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,

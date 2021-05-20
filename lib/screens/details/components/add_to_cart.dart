@@ -10,13 +10,8 @@ import '../../../constants.dart';
 class AddToCart extends StatelessWidget {
   final BuyProduct buyProduct;
   final Product product;
-  final int amount;
-  const AddToCart({
-    Key key,
-    this.product,
-    this.buyProduct,
-    this.amount,
-  }) : super(key: key);
+  static int allPrice = 0;
+  const AddToCart({Key key, this.product, this.buyProduct}) : super(key: key);
   void bProduct(Product p) {
     List<BuyProduct> products = [];
     products.add(p);

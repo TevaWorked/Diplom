@@ -16,7 +16,6 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  int amount = 1;
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
@@ -48,7 +47,6 @@ class Body extends StatelessWidget {
                         AddToCart(
                           product: product,
                           buyProduct: buyProduct,
-                          amount: amount,
                         ),
                       ],
                     ),
