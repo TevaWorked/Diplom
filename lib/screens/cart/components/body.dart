@@ -6,7 +6,6 @@ import 'package:flutter_diplom/models/BuyProduct.dart';
 import 'package:flutter_diplom/models/Product.dart';
 
 import '../../../constants.dart';
-
 class Body extends StatefulWidget {
   final BuyProduct product;
   Body({Key key, this.product}) : super(key: key);
@@ -18,7 +17,11 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   final BuyProduct product;
   _BodyState(this.product);
+  
   Widget build(BuildContext context) {
+  int allPrice = 0;
+  
+    double width = MediaQuery.of(context).size.width;
     print(product.products.length);
     return Column(
       children: [
@@ -31,14 +34,33 @@ class _BodyState extends State<Body> {
                     product.products[index].imageBG,
                     product.products[index].price,
                     product.products[index].amount,
+                    width,
                   )),
         ),
+        Padding(
+          padding: const EdgeInsets.all(kDefaultPadding),
+          child: Row(
+            children: [
+              Text("Итог:  $allPrice "),
+               Expanded(
+                  child: FlatButton(
+                    height: 50,
+                   onPressed: (){},
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18)),
+                      color: Colors.blue,
+                   child: Text("Заказать"),),
+               ),
+            ],
+          ),
+        )
       ],
+      
     );
   }
 }
 
-Widget _buildItems(String name, String image, int price, int count) {
+Widget _buildItems(String name, String image, int price, int count, double width) {
   return Padding(
     padding: EdgeInsets.all(kDefaultPadding),
     child: InkWell(
@@ -63,7 +85,7 @@ Widget _buildItems(String name, String image, int price, int count) {
                 SizedBox(width: 10.0),
                 Container(
                   padding: EdgeInsets.all(kDefaultPadding),
-                  width: 215,
+                  width: width * 0.55,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -74,16 +96,16 @@ Widget _buildItems(String name, String image, int price, int count) {
                       Container(
                         padding: EdgeInsets.all(kDefaultPadding),
                         child: Text(
-                          price.toString() + "Р. " + "X" + count.toString(),
+                          price.toString() + "р. " + "X " + count.toString(),
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 30,
+                              fontSize: 25,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
                         child: Text(
-                          "Итог: " + (count * price).toString(),
+                          "Итог: " +  (count * price).toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,

@@ -4,12 +4,14 @@ import 'package:flutter_diplom/models/Product.dart';
 class BuyProduct extends Product {
   Product product;
   bool fun = true;
+  int count = 0;
   List<Product> products = [];
   BuyProduct({
     this.product,
   });
   void fillList(Product product) {
     products.add(product);
+
     print(product.name);
     print(products.length);
   }
@@ -19,7 +21,7 @@ class BuyProduct extends Product {
   }
 
   void addAmount(Product product, int sum) {
-    product.amount = sum;
+      product.amount = sum;    
 
     print(product.name);
   }
