@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_diplom/models/Product.dart';
-import 'package:flutter_diplom/screens/cart/components/body.dart';
 import 'package:flutter_svg/svg.dart';
+import 'body.dart';
 
-import '../../constants.dart';
-
-class Cart extends StatelessWidget {
-  final Product product;
-  const Cart({
-    Key key,
-    this.product,
-  }) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        appBar: buildAppBar(context),
-        body: Body(product: product),
-      ),
+    return Scaffold(
+      appBar: buildAppBar(context),
+      body: Body(),
     );
   }
 
@@ -27,9 +18,12 @@ class Cart extends StatelessWidget {
       backgroundColor: Colors.blue,
       elevation: 0,
       title: Text(
-        "Корзина",
+        "Оформление заказа",
         style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 30,
+        ),
       ),
       leading: IconButton(
         icon: SvgPicture.asset(

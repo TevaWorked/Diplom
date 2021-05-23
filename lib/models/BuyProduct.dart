@@ -6,7 +6,6 @@ import 'package:flutter_diplom/models/Product.dart';
 class BuyProduct extends Product {
   Product product;
   bool fun = true;
-  int allprice = 0;
   List<Product> products = [];
   BuyProduct({
     this.product,
@@ -28,8 +27,12 @@ class BuyProduct extends Product {
     print(product.name);
   }
 
-  void allPrice(int amount, int count) {
-    allprice += amount * count;
+  int allPrice() {
+    int sum = 0;
+    for (int i = 0; i < products.length; i++) {
+      sum += products[i].amount * products[i].price;
+    }
+    return sum;
   }
 
   bool prov(Product product) {

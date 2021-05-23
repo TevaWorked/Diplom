@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_diplom/models/BuyProduct.dart';
 import 'package:flutter_diplom/models/Product.dart';
-
+import 'package:flutter_diplom/screens/login/login_screen.dart';
+import 'alert.dart';
 import '../../../constants.dart';
 
 class Body extends StatefulWidget {
@@ -42,6 +43,7 @@ class _BodyState extends State<Body> {
                   onDismissed: (direction) {
                     setState(() {
                       product.products.removeAt(index);
+                      showAlertDialog(context);
                     });
                   },
                   background: Container(
@@ -55,10 +57,20 @@ class _BodyState extends State<Body> {
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Row(
             children: [
+              Text(
+                "Итог: " + product.allPrice().toString(),
+                style: TextStyle(
+                    color: kTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17),
+              ),
               Expanded(
                 child: FlatButton(
                   height: 50,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
                   color: Colors.blue,
