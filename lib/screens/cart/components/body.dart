@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_diplom/models/BuyProduct.dart';
 import 'package:flutter_diplom/models/Product.dart';
 import 'package:flutter_diplom/screens/login/login_screen.dart';
+import '../../no_coonect.dart';
 import 'alert.dart';
 import '../../../constants.dart';
 
@@ -68,8 +70,7 @@ class _BodyState extends State<Body> {
                 child: FlatButton(
                   height: 50,
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                    checkInternetConnectivity(context);
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
@@ -151,4 +152,15 @@ Widget _buildItems(
       ),
     ),
   );
+}
+
+checkInternetConnectivity(BuildContext context) async {
+  var result = await Connectivity().checkConnectivity();
+  if (result == ConnectivityResult.none) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => NoConnect()));
+  } else {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
 }
