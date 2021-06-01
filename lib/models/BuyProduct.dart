@@ -43,4 +43,14 @@ class BuyProduct extends Product {
     }
     return true;
   }
+
+  // ignore: missing_return
+  String message(){ 
+    String mess = " ";
+    for(Product i in products){
+      mess += i.name.toString() + " X:" + i.amount.toString() + "\n";
+    }
+      return mess + "\n" + "Цена: " + allPrice().toString();
+
+  }
 }

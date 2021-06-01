@@ -2,8 +2,9 @@
 import "package:flutter/material.dart";
 
 class Product {
-  final String image, name, description, categorie, imageBG;
+  final String image, name, description, imageBG;
   final int price, id;
+  String categorie;
   int amount;
 
   Product(
@@ -68,6 +69,29 @@ List<Product> products = [
       id: 5,
       name: 'Веерные грабли Inforce ',
       categorie: 'Для сада',
+      description:
+          "Веерные грабли Inforce 06-12-12 - это легкий и практичный инструмент для сбора опавшей листвы и мусора." +
+              "Рабочая часть изготовлена из полипропилена высокого качества. Черенок изготовлен из окрашенного алюминия." +
+              "Эргономичная конструкция граблей повышает качество и снижает трудоемкость работы. Максимальная ширина веера - 650 мм.",
+      image: "assets/images/Grabli.jpg",
+      imageBG: "assets/images/Grabli.png",
+      price: 905,
+      amount: 0),
+      Product(
+      id: 6,
+      name: 'Горшочек для рассады, торфяной, 20 шт',
+      categorie: 'Для дома',
+      description:
+          "Горшочек для рассады, торфяной, 20 шт  представляет собой необходимое для рассады изделие." +
+              "При достижении растением определенных размеров, горшочек можно пересадить, не извлекая из него грунт.",
+      image: "assets/images/Gorshek.jpg",
+      imageBG: "assets/images/GorshekBG.png",
+      price: 82,
+      amount: 0),
+     Product(
+      id: 7,
+      name: 'Веерные грабли Inforce ',
+      categorie: 'Ремонт',
       description:
           "Веерные грабли Inforce 06-12-12 - это легкий и практичный инструмент для сбора опавшей листвы и мусора." +
               "Рабочая часть изготовлена из полипропилена высокого качества. Черенок изготовлен из окрашенного алюминия." +

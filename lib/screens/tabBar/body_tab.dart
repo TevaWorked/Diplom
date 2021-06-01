@@ -3,16 +3,16 @@ import 'package:flutter_diplom/compClass.dart';
 import 'package:flutter_diplom/constants.dart';
 import 'package:flutter_diplom/models/BuyProduct.dart';
 import 'package:flutter_diplom/screens/details/detail_screen.dart';
+import 'package:flutter_diplom/screens/home/components/item_card.dart';
+import 'package:flutter_diplom/screens/home/select_categorie.dart';
 import '../../../models/Product.dart';
 
-import '../select_categorie.dart';
-import 'categories.dart';
-import 'item_card.dart';
 
-class Body extends StatelessWidget {
+
+class BodyTab extends StatelessWidget {
   static BuyProduct buyProduct;
-
-  const Body({Key key, buyProduct}) : super(key: key);
+  final List<Product> products;
+  const BodyTab({Key key, this.products, buyProduct}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,12 +21,11 @@ class Body extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
         ),
-        Categories(),
         Expanded(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: GridView.builder(
-              itemCount: gardenProduct().length,
+              itemCount: products.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: kDefaultPadding,
@@ -38,13 +37,13 @@ class Body extends StatelessWidget {
                 index,
               ) =>
                   ItemCard(
-                    product: gardenProduct()[index],
+                    product: products[index],
                     press: () => Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => DetailsScreen(
-                                  product: gardenProduct()[index],
-                                  buyProduct: retProduct(gardenProduct()[index]),
+                                  product: products[index],
+                                  buyProduct: retProduct(products[index]),
                                 ))),
                   )),
         )),

@@ -1,16 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_diplom/constants.dart';
+import 'package:flutter_diplom/models/BuyProduct.dart';
 import 'package:flutter_diplom/models/Product.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key key}) : super(key: key);
+  const Body({Key key, this.product}) : super(key: key);
+  final BuyProduct product;
+  
   @override
   Widget build(BuildContext context) {
-    TextEditingController gemail, phone, name;
-    List<String> list = [];
+   List<String> attachments = [];
+  bool isHTML = false;
+  final _recipientController = TextEditingController(
+    text: '5904517@gmail.com',
+  );
+
+  final _subjectController = TextEditingController(text: "Заказ");
+    
+  var  _bodyController = TextEditingController(
+    text: " "
+  );
+  var name;
+  var phone;
+
+  Future<void> send() async {
+    final Email email = Email(
+      body: _bodyController.text,
+      subject: _subjectController.text,
+      recipients: [_recipientController.text],
+      attachmentPaths: attachments,
+      isHTML: isHTML,
+    );
+
+    String platformResponse;
+
+    try {
+      await FlutterEmailSender.send(email);
+      platformResponse = 'success';
+    } catch (error) {
+      platformResponse = error.toString();
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(platformResponse),
+      ),
+    );
+  }
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
@@ -22,7 +60,7 @@ class Body extends StatelessWidget {
                   height: 50,
                 ),
                 TextFormField(
-                  controller: name,
+                  controller: name = TextEditingController(),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
@@ -36,7 +74,7 @@ class Body extends StatelessWidget {
                   height: 40,
                 ),
                 TextFormField(
-                  controller: phone,
+                  controller: phone = TextEditingController(),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
@@ -52,19 +90,18 @@ class Body extends StatelessWidget {
                 SizedBox(
                   height: 25,
                 ),
-                TextFormField(
-                  controller: gemail,
+                 Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _bodyController = TextEditingController(text: name.toString() +"\n" + phone.toString() +"\n"+product.message()),
+                  maxLines: null,
+                  expands: true,
+                  textAlignVertical: TextAlignVertical.top,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(width: 2, color: Colors.blue),
-                    ),
-                    labelText: "Почта",
-                    prefixIcon: Icon(Icons.email),
-                    suffixText: "@gmail.com",
-                  ),
-                  inputFormatters: [FilteringTextInputFormatter.deny("@")],
+                      labelText: 'Body', border: OutlineInputBorder()),
                 ),
+              ),
+            
                 SizedBox(
                   height: 50,
                 ),
@@ -74,7 +111,7 @@ class Body extends StatelessWidget {
                       child: Container(
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: (){},
                           style: TextButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),

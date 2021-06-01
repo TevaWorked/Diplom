@@ -22,6 +22,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   final BuyProduct product;
   _BodyState(this.product);
+  
 
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -70,7 +71,7 @@ class _BodyState extends State<Body> {
                 child: FlatButton(
                   height: 50,
                   onPressed: () {
-                    checkInternetConnectivity(context);
+                    checkInternetConnectivity(context, product);
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18)),
@@ -154,13 +155,13 @@ Widget _buildItems(
   );
 }
 
-checkInternetConnectivity(BuildContext context) async {
+checkInternetConnectivity(BuildContext context, BuyProduct product) async {
   var result = await Connectivity().checkConnectivity();
   if (result == ConnectivityResult.none) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => NoConnect()));
   } else {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        context, MaterialPageRoute(builder: (context) => LoginScreen(product: product,)));
   }
 }

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_diplom/models/BuyProduct.dart';
+import 'package:flutter_diplom/models/Product.dart';
 import 'package:flutter_diplom/screens/home/components/item_card.dart';
+import 'package:flutter_diplom/screens/home/select_categorie.dart';
 
 import '../../../constants.dart';
 
 class Categories extends StatefulWidget {
-  Categories({Key key}) : super(key: key);
-
+  Categories({Key key, this.product, this.categorie}) : super(key: key);
+   BuyProduct product;
+   String categorie;
   @override
   _CategoriesState createState() => _CategoriesState();
 }
 
 class _CategoriesState extends State<Categories> {
   @override
-  List<String> categories = ["Для сада", "Для дома", "Ремонт", "Сантехника"];
+  List<String> categories = ["Все","Для сада", "Для дома", "Ремонт", "Сантехника"];
   String catigorie;
   int selecteIndex = 0;
   Widget build(BuildContext context) {
@@ -34,7 +38,7 @@ class _CategoriesState extends State<Categories> {
       onTap: () {
         setState(() {
           selecteIndex = index;
-          catigorie = categories[selecteIndex];
+          widget.categorie = categories[selecteIndex];
           // Navgator.pushNamed(context, )
         });
       },

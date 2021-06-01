@@ -4,6 +4,7 @@ import 'package:flutter_diplom/constants.dart';
 import 'package:flutter_diplom/models/BuyProduct.dart';
 import 'package:flutter_diplom/models/Product.dart';
 import 'package:flutter_diplom/screens/cart/cart_screen.dart';
+import 'package:flutter_diplom/screens/home/components/categories.dart';
 import "package:flutter_svg/svg.dart";
 
 import 'components/body.dart';

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_diplom/models/BuyProduct.dart';
+import 'package:flutter_diplom/screens/login/email_sender.dart';
 import 'package:flutter_svg/svg.dart';
 import 'body.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key key}) : super(key: key);
+  const LoginScreen({Key key, this.product}) : super(key: key);
+  final BuyProduct product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
-      body: Body(),
+      body: EmailSender(product: product),
     );
   }
 

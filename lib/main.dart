@@ -3,6 +3,7 @@ import 'package:flutter_diplom/compClass.dart';
 import 'package:flutter_diplom/constants.dart';
 import 'package:flutter_diplom/models/Product.dart';
 import 'package:flutter_diplom/screens/home/home_screen.dart';
+import 'package:flutter_diplom/screens/tabBar/tab_bar.dart';
 
 import 'models/BuyProduct.dart';
 
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(
-        buyProduct: retProduct(null),
+      home: TabBar2(
+        product: retProduct(null),
       ),
     );
   }
